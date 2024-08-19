@@ -12,16 +12,33 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: service-routes
-          uri: lb://**
+        - id: customer-service-route
+          uri: lb://customer-service
           predicates:
-            - Path=/**
+            - Path=/api/v1/customers/**
+        - id: reservation-service-route
+          uri: lb://reservation-service
+          predicates:
+            - Path=/api/v1/reservations/**
+        - id: hotel-service-route
+          uri: lb://hotel-service
+          predicates:
+            - Path=/api/v1/hotels/**
+        - id: payment-service-route
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/v1/payments/**
+        - id: notification-service-route
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/notifications/**                                                
+            
 
 logging:
   level:
-    root: DEBUG
-    io.micrometer: DEBUG
-    brave: DEBUG
+    root: INFO
+    io.micrometer: INFO
+    brave: INFO
 
 management:
   tracing:
